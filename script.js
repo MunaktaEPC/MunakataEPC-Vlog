@@ -14,7 +14,7 @@ firebase.initializeApp(firebaseConfig);
 var db = firebase.database();
 
 // 投稿処理
-function postMessage() {
+function sendPost() {
   var name = document.getElementById("name").value;
   var message = document.getElementById("message").value;
 

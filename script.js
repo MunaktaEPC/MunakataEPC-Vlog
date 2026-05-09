@@ -13,10 +13,12 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var db = firebase.database();
 
-// 投稿処理
+// 投稿処理（postMessage ではなく sendPost に変更）
 function sendPost() {
   var name = document.getElementById("name").value;
   var message = document.getElementById("message").value;
+
+  if (!name || !message) return;
 
   db.ref("posts").push({
     name: name,

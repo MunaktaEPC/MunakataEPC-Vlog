@@ -1,8 +1,8 @@
-// Firebase CDN版の読み込み
+// Firebase CDN モジュール版
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
 import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
 
-// あなたの Firebase 設定（そのまま使える）
+// あなたの Firebase 設定
 const firebaseConfig = {
   apiKey: "AIzaSyA-HFDNg8NsrYMzt-4LFIHug4kXIYg-vJ0",
   authDomain: "munakataepc.firebaseapp.com",
@@ -17,8 +17,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-// 投稿処理
-export function postMessage() {
+// 投稿処理（HTML から呼べるように window に登録）
+window.postMessage = function () {
   const name = document.getElementById("name").value;
   const message = document.getElementById("message").value;
 
@@ -29,7 +29,7 @@ export function postMessage() {
   });
 
   document.getElementById("message").value = "";
-}
+};
 
 // 投稿一覧のリアルタイム更新
 onValue(ref(db, "posts"), (snapshot) => {

@@ -1,4 +1,4 @@
-// あなたの Firebase 設定
+// Firebase 設定
 var firebaseConfig = {
   apiKey: "AIzaSyA-HFDNg8NsrYMzt-4LFIHug4kXIYg-vJ0",
   authDomain: "munakataepc.firebaseapp.com",
@@ -13,7 +13,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var db = firebase.database();
 
-// 投稿処理（postMessage ではなく sendPost に変更）
+// 投稿処理
 function sendPost() {
   var name = document.getElementById("name").value;
   var message = document.getElementById("message").value;

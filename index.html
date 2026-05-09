@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>部活サイト</title>
-  </head>
-  <body>
-    <h1>〇〇部 公式サイト</h1>
-    <p>ようこそ！</p>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <title>部活掲示板</title>
+</head>
+<body>
+  <h1>部活掲示板</h1>
+
+  <input id="name" placeholder="名前"><br>
+  <textarea id="message" placeholder="メッセージ"></textarea><br>
+  <button onclick="postMessage()">投稿</button>
+
+  <h2>投稿一覧</h2>
+  <div id="posts"></div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+
+  <script src="script.js"></script>
+</body>
 </html>

@@ -1,9 +1,5 @@
-// Firebase CDN モジュール版
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
-
 // あなたの Firebase 設定
-const firebaseConfig = {
+var firebaseConfig = {
   apiKey: "AIzaSyA-HFDNg8NsrYMzt-4LFIHug4kXIYg-vJ0",
   authDomain: "munakataepc.firebaseapp.com",
   databaseURL: "https://munakataepc-default-rtdb.asia-southeast1.firebasedatabase.app",
@@ -14,33 +10,33 @@ const firebaseConfig = {
 };
 
 // Firebase 初期化
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+firebase.initializeApp(firebaseConfig);
+var db = firebase.database();
 
-// 投稿処理（HTML から呼べるように window に登録）
-window.postMessage = function () {
-  const name = document.getElementById("name").value;
-  const message = document.getElementById("message").value;
+// 投稿処理
+function postMessage() {
+  var name = document.getElementById("name").value;
+  var message = document.getElementById("message").value;
 
-  push(ref(db, "posts"), {
+  db.ref("posts").push({
     name: name,
     message: message,
     time: Date.now()
   });
 
   document.getElementById("message").value = "";
-};
+}
 
 // 投稿一覧のリアルタイム更新
-onValue(ref(db, "posts"), (snapshot) => {
-  const posts = snapshot.val();
-  const postsDiv = document.getElementById("posts");
+db.ref("posts").on("value", function(snapshot) {
+  var posts = snapshot.val();
+  var postsDiv = document.getElementById("posts");
   postsDiv.innerHTML = "";
 
-  for (let id in posts) {
-    const p = posts[id];
-    const div = document.createElement("div");
-    div.innerHTML = `<strong>${p.name}</strong>: ${p.message}`;
+  for (var id in posts) {
+    var p = posts[id];
+    var div = document.createElement("div");
+    div.innerHTML = "<strong>" + p.name + "</strong>: " + p.message;
     postsDiv.appendChild(div);
   }
 });
